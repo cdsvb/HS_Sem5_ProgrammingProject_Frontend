@@ -9,10 +9,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MovieRecommendationComponent } from './components/movie-recommendation/movie-recommendation.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MovieRecommendationComponent
   ],
   imports: [
     BrowserModule,

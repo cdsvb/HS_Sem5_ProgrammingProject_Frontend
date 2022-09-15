@@ -8,10 +8,10 @@
           <mat-sidenav-container class="example-container" autosize>
             <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()">
               <mat-nav-list>
-                <mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
+                <a mat-list-item (click)="showSubmenu = !showSubmenu" class="parent" routerLink="/recommendation"> 
                   <span class="full-width" *ngIf="isExpanded || isShowing">Movie recommendation</span>
                   <mat-icon mat-list-icon>movie</mat-icon>
-                </mat-list-item>
+                </a>
               </mat-nav-list>
               <mat-nav-list>
           </mat-nav-list>
