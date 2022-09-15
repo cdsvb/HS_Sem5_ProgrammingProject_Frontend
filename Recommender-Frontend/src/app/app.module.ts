@@ -10,11 +10,13 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MovieRecommendationComponent } from './components/movie-recommendation/movie-recommendation.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MovieRecommendationComponent
+    MovieRecommendationComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
