@@ -1,0 +1,72 @@
+@import '@angular/material/theming';
+
+$mat-client-primary: (
+        50 : #e50914,
+        100 : #e50914,
+        200 : #e50914,
+        300 : #e50914,
+        400 : #e50914,
+        500 : #e50914, // Primary
+        600 : #e50914,
+        700 : #e50914,
+        800 : #e50914,
+        900 : #e50914,
+        A100 : #e50914,
+        A200 : #e50914,
+        A400 : #e50914,
+        A700 : #e50914,
+        contrast: (
+                50 : #000000,
+                100 : #000000,
+                200 : #000000,
+                300 : #ffffff,
+                400 : #ffffff,
+                500 : #ffffff,
+                600 : #ffffff,
+                700 : #ffffff,
+                800 : #ffffff,
+                900 : #ffffff,
+                A100 : #ffffff,
+                A200 : #ffffff,
+                A400 : #ffffff,
+                A700 : #ffffff,
+        )
+);
+
+$mat-client-accent: (
+        50 : #ffffff,
+        100 : #ffffff,
+        200 : #ffffff,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff, // Accent
+        //500 : #64D418, // Accent
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #ffffff,
+        A200 : #ffffff,
+        A400 : #ffffff,
+        A700 : #ffffff,
+        contrast: (
+                50 : #000000,
+                100 : #000000,
+                200 : #000000,
+                300 : #000000,
+                400 : #000000,
+                500 : #000000,
+                600 : #000000,
+                700 : #000000,
+                800 : #000000,
+                900 : #000000,
+                A100 : #000000,
+                A200 : #000000,
+                A400 : #000000,
+                A700 : #000000,
+        )
+);
+
+// Client theming
+$app-client-primary: mat-palette($mat-client-primary);
+$app-client-accent: mat-palette($mat-client-accent);

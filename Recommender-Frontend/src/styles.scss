@@ -1,1 +1,226 @@
-/* You can add global styles to this file, and also import other style files */
+@import "themes";
+@import "vars";
+
+// --------------------
+//        Reset
+// --------------------
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: $fontProductSans;
+}
+
+// Headings
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: $fontProductSans;
+  font-weight: 500;
+}
+
+.h1 {
+  font-size: 25px;
+}
+
+.h2 {
+  font-size: 23px;
+}
+
+.h3 {
+  font-size: 20px;
+}
+
+.h4 {
+  font-size: 18px;
+}
+
+.h5 {
+  font-size: 16px;
+}
+
+.h6 {
+  font-size: 14px;
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid #d0d0d0;
+  margin: 10px 0;
+}
+
+a {
+  text-decoration: none;
+  color: $primaryClient;
+
+  &:hover {
+    opacity: .8;
+  }
+}
+
+input, button, a {
+  outline: 0;
+}
+
+// Margins
+// Bottom
+.mb-5 {
+  margin-bottom: 5px !important;
+}
+
+.mb-10 {
+  margin-bottom: 10px !important;
+}
+
+// Top
+.mt-10 {
+  margin-top: 10px !important;
+}
+
+// Left
+.ml-10 {
+  margin-left: 10px !important;
+}
+
+// Flex grid system
+.flex {
+  display: flex;
+
+  &.space-between {
+    justify-content: space-between;
+  }
+
+  &.items-center {
+    align-items: center;
+  }
+
+  &.justify-center {
+    justify-content: center;
+  }
+}
+
+// --------------------
+//        Themes
+// --------------------
+.client-theme {
+  @include angular-material-theme($app-client-theme);
+}
+
+// --------------------
+//     Global styles
+// --------------------
+mat-card.content-row {
+  padding: 0;
+  /**
+   * Prevents override from Angular material
+   */
+  display: flex;
+}
+.content-row {
+  display: flex;
+
+  .content-left {
+    display: flex;
+    align-items: center;
+  }
+
+  .spacer {
+    flex-grow: 1;
+  }
+
+  .content-right {
+    //flex-shrink: 0;
+  }
+}
+
+.page-header {
+  margin-bottom: 15px;
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #a3a8b8;
+  border-radius: 4px;
+
+  &:hover {
+    background: #555;
+  }
+}
+
+// --------------------
+//   Angular Material
+// --------------------
+mat-card, .mat-card {
+  overflow: hidden;
+  font-family: $fontProductSans;
+}
+
+// --------------------
+//      Overrides
+// --------------------
+.mat-dialog-title.active {
+  margin: -24px -24px 24px -24px;
+  font-weight: 400;
+  padding: 24px;
+  background: $primaryClient;
+  color: $white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mat-dialog-actions {
+  margin-bottom: -10px !important;
+  justify-content: flex-end;
+
+  button {
+    margin-left: 10px;
+  }
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  background: $white;
+  margin: 5px 0;
+  position: relative;
+  cursor: pointer;
+
+  .profile-image {
+    @include circle(60px);
+    background: #dddddd;
+    margin-left: 15px;
+    background-size: 60px 60px;
+  }
+
+  .profile-right {
+    display: flex;
+    margin-left: 10px;
+
+    span {
+      display: flex;
+      align-items: center;
+    }
+
+    .badge {
+      border: 1px solid #9d9d9d;
+      margin-left: 10px;
+      padding: 4px 8px;
+      font-size: 12px;
+      border-radius: 8px;
+    }
+  }
+}
+
+// Has to be done, otherwise you can not change the padding of the body
+.mat-expansion-panel-content > .mat-expansion-panel-body {   
+  padding: 0px; 
+}
+
+

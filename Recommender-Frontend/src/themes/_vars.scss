@@ -1,0 +1,48 @@
+@import "color-palette";
+
+// Colors
+$primaryClient: mat-color($app-client-primary);
+$primaryClientText: mat-contrast($app-client-primary, 500);
+$accentClient: mat-color($app-client-accent);
+$accentClientText: mat-contrast($app-client-accent, 500);
+
+$white: #FFFFFF;
+$black: #000000;
+
+// Fonts
+$fontProductSans: 'Product Sans', sans-serif;
+
+// Mixins
+@mixin size($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+@mixin circle($radius) {
+  @include size($radius, $radius);
+  border-radius: 50%;
+}
+
+@mixin mat-icon($size) {
+  width: $size;
+  height: $size;
+  line-height: $size;
+  font-size: $size;
+}
+
+@mixin line-clamp($maxLines) {
+  display: -webkit-box;
+  -webkit-line-clamp: $maxLines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@mixin mat-icon-button($buttonSize, $iconSize) {
+  width: $buttonSize;
+  height: $buttonSize;
+  line-height: $buttonSize;
+
+  mat-icon {
+    @include mat-icon($iconSize);
+  }
+}

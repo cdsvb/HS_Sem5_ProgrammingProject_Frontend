@@ -1,0 +1,114 @@
+@import "vars";
+
+mat-progress-bar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+app-logo {
+  cursor: pointer;
+}
+
+.hamburger-icon {
+  margin-right: 30px;
+  margin-left: -4px;
+}
+
+.content-right {
+  .menu-list {
+    display: flex;
+    list-style: none;
+
+    li:not(:last-child) {
+      margin-right: 10px;
+    }
+
+    button {
+      background-color: transparent;
+      color: $primaryClientText;
+
+      &.active {
+        background-color: $accentClient;
+        color: $accentClientText;
+      }
+    }
+  }
+}
+
+mat-sidenav-container {
+  height: calc(100vh - 64px);
+
+  mat-sidenav {
+    background: #ffffff;
+    /**
+     * Remove margin, if user is not logged in
+     * !important to override margin set by animation
+     */
+    &.closed ~ mat-sidenav-content {
+      margin-left: 0 !important;
+    }
+
+    .sidenav-item {
+      cursor: pointer;
+      color: $primaryClientText;
+
+      span {
+        padding-left: 16px;
+      }
+
+      &.active {
+        color: $accentClient;
+      }
+    }
+  }
+
+  mat-sidenav-content {
+    background: #F5F5F5;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+  }
+}
+
+.menu {
+  max-height: 400px;
+}
+
+.notification-item {
+  white-space: normal;
+  overflow: auto;
+  line-height: normal;
+  height: auto;
+  padding: 10px;
+
+  .content {
+    display: flex;
+
+    .text {
+      padding-left: 5px;
+
+      span {
+        font-weight: 500;
+        color: $primaryClient;
+      }
+    }
+  }
+
+  mat-icon {
+    margin-right: 0;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      line-height: 28px;
+      padding: 0 10px;
+      margin-left: 5px;
+    }
+  }
+}
+

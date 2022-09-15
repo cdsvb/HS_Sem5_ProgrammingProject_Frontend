@@ -1,0 +1,15 @@
+@import '@angular/material/theming';
+@import "color-palette";
+
+// Only include once!
+@include mat-core();
+
+$app-warn: mat-palette($mat-red);
+
+$app-client-theme: mat-light-theme((
+        color: (
+                primary: $app-client-primary,
+                accent: $app-client-accent,
+                warn: $app-warn,
+        )
+));
