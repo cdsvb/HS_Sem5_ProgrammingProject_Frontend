@@ -40,6 +40,6 @@ jobs:
       - name: Build
         run: |
           npm run build --prod
-        - name: Deploy
+      - name: Deploy
         run: |
           npm run deploy
