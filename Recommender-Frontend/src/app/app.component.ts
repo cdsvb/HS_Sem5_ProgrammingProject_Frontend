@@ -9,7 +9,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 export class AppComponent {
   title = 'Recommender-Frontend';
   @ViewChild('sidenav') sidenav: MatSidenav | undefined;
-  isExpanded = true;
+  isExpanded = false;
   showSubmenu: boolean = false;
   isShowing = false;
   showSubSubMenu: boolean = false;
