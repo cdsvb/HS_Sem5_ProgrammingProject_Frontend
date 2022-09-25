@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,12 @@ export class AppComponent {
   showSubmenu: boolean = false;
   isShowing = false;
   showSubSubMenu: boolean = false;
+
+  constructor(private router: Router) { }
+
+  switchUrl() {
+    this.router.navigate(['/']);
+  }
 
   mouseenter() {
     if (!this.isExpanded) {
