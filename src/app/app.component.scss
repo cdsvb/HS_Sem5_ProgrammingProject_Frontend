@@ -11,6 +11,28 @@ app-logo {
   cursor: pointer;
 }
 
+.brand {
+  display: flex;
+  align-items: center;
+  height: 72px;
+  margin-right: auto;
+  padding-left: 24px;
+  -webkit-font-smoothing: auto;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.brand_logo {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+}
+
+.brand_title {
+  color: #fff;
+}
+
 .hamburger-icon {
   margin-right: 30px;
   margin-left: -4px;
