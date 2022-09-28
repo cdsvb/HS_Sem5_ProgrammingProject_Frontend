@@ -1,1 +1,19 @@
-<p>movie-recommendation works!</p>
+<form [formGroup]="movieForm" (submit)="searchImage()" class="example-form">
+    <div style="display: flex;">
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Movie title</mat-label>
+            <input matInput placeholder="Titanic" formControlName="name">
+        </mat-form-field>
+        <button color="primary" type="submit" mat-button>Search</button>
+    </div>
+</form>
+
+<mat-list [@listAnimation]="items.length" class="list-horizontal" role="list">
+    <mat-list-item role="listitem" *ngFor="let item of items">
+        <div class="img-with-text">
+            <img [src]='item.poster_path'>
+            <p>{{item.name}}</p>
+        </div>
+    </mat-list-item>
+</mat-list>
+  

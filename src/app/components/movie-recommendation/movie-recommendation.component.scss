@@ -1,0 +1,40 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    margin-left: 40px;
+    margin-top: 50px;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+.list-horizontal {
+    padding: 0;
+    .mat-list-item {
+      display: inline-block;
+      height: auto;
+      width: auto;
+    }
+}
+
+.img-with-text {
+    text-align: justify;
+    margin-left: 20px;
+    width: [width of img];
+}
+
+.img-with-text img {
+    display: block;
+    margin: 0 auto;
+    height: 200px;
+    width: 133.33px;
+}
+
+.img-with-text p {
+    width: 120px;
+    margin-left: 6.5px;
+    margin-top: 5px;
+    text-align: center;
+}
