@@ -49,8 +49,9 @@ public movieForm: FormGroup= new FormGroup({
   getMoviePoster() {
     const title: string = this.movieForm.controls["name"].value;
     const index = title.indexOf(": Season");
+    const search = index >= 0 ? title.substring(0, index) : title;
 
-    this.moviedbService.getMovie(title.substring(0, index)).pipe(first()).subscribe(res => {
+    this.moviedbService.getMovie(search).pipe(first()).subscribe(res => {
       if(res.total_results > 0) {
         const item = res.results[0];
         item.name = item.title ?? item.name;
