@@ -47,13 +47,16 @@ public movieForm: FormGroup= new FormGroup({
   }
 
   getMoviePoster() {
-    const title = this.movieForm.controls["name"].value;
-    console.log(title);
-    this.moviedbService.getMovie(title).pipe(first()).subscribe(res => {
-      console.log(res);
+    const title: string = this.movieForm.controls["name"].value;
+    const index = title.indexOf(": Season");
+
+    this.moviedbService.getMovie(title.substring(0, index)).pipe(first()).subscribe(res => {
       if(res.total_results > 0) {
         const item = res.results[0];
         item.name = item.title ?? item.name;
+        if(index >= 0) {
+          item.name = `${item.name} |${title.substring(index + 1)}`;
+        }
         item.poster_path = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
         this.items.push(item);
       } else {
