@@ -52,10 +52,16 @@ public movieForm: FormGroup= new FormGroup({
     this.moviedbService.getMovie(title).pipe(first()).subscribe(res => {
       console.log(res);
       if(res.total_results > 0) {
-          const item = res.results[0];
-          item.name = item.original_name ?? item.original_title;
-          item.poster_path = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
-          this.items.push(item);
+        const item = res.results[0];
+        item.name = item.title ?? item.name;
+        item.poster_path = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
+        this.items.push(item);
+      } else {
+        const item = {
+          name: title,
+          poster_path: "assets/img/empty.png"
+        } as IResult;
+        this.items.push(item);
       }
     });
   }

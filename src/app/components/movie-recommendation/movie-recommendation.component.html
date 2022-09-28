@@ -11,7 +11,7 @@
 <mat-list [@listAnimation]="items.length" class="list-horizontal" role="list">
     <mat-list-item role="listitem" *ngFor="let item of items">
         <div class="img-with-text">
-            <img style="height: 200px;" [src]='item.poster_path'>
+            <img [src]='item.poster_path'>
             <p>{{item.name}}</p>
         </div>
     </mat-list-item>

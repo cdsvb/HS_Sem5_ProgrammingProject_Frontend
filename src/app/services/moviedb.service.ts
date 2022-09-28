@@ -17,6 +17,6 @@ private apiKey: string = "?api_key=477a08b42e9d56ffd7c50d3c183e29f4";
     }
 
     getMovie(title: string): Observable<ISearchResult> {
-        return this.http.get<ISearchResult>(`${this.baseApiUrl}search/multi${this.apiKey}&language=en-US&query=${this.serializer.parse(title)}&page=1&include_adult=false`);
+        return this.http.get<ISearchResult>(`${this.baseApiUrl}search/multi${this.apiKey}&language=de-DE&query=${this.serializer.parse(title)}&page=1`);
     }
 }
