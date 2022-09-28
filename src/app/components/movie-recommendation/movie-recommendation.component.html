@@ -6,5 +6,14 @@
         </mat-form-field>
         <button color="primary" type="submit" mat-button>Search</button>
     </div>
-    <img src='https://image.tmdb.org/t/p/w500/{{imagePath}}'>
 </form>
+
+<mat-list [@listAnimation]="items.length" class="list-horizontal" role="list">
+    <mat-list-item role="listitem" *ngFor="let item of items">
+        <div class="img-with-text">
+            <img style="height: 200px;" [src]='item.poster_path'>
+            <p>{{item.name}}</p>
+        </div>
+    </mat-list-item>
+</mat-list>
+  
