@@ -1,1 +1,10 @@
-<p>movie-recommendation works!</p>
+<form [formGroup]="movieForm" (submit)="searchImage()" class="example-form">
+    <div style="display: flex;">
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Movie title</mat-label>
+            <input matInput placeholder="Titanic" formControlName="name">
+        </mat-form-field>
+        <button color="primary" type="submit" mat-button>Search</button>
+    </div>
+    <img src='https://image.tmdb.org/t/p/w500/{{imagePath}}'>
+</form>
