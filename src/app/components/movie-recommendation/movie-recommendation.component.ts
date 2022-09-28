@@ -21,10 +21,6 @@ const listAnimation = trigger('listAnimation', [
     query(':enter',
       [style({ opacity: 0 }), stagger('200ms', animate('600ms ease-out', style({ opacity: 1 })))],
       { optional: true }
-    ),
-    query(':leave',
-      animate('600ms', style({ opacity: 0 })),
-      { optional: true}
     )
   ])
 ]);
