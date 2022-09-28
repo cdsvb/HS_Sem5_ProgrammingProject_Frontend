@@ -3,21 +3,21 @@
       <ng-container>
           <mat-toolbar color="primary" class="example-toolbar">
             <button mat-icon-button (click)="isExpanded = !isExpanded"><mat-icon>menu</mat-icon></button>
-            <a (click)="switchUrl()" class="brand">
+            <a routerLink="/" class="brand">
                 <img class="brand_logo" src="assets/img/netflix.png">
                 <span class="brand_title">Movie Recommendation</span>
             </a>
           </mat-toolbar>
           <mat-sidenav-container class="example-container" autosize>
             <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()">
-              <mat-nav-list>
-                <a mat-list-item (click)="showSubmenu = !showSubmenu" class="parent" routerLink="/recommendation"> 
-                  <span class="full-width" *ngIf="isExpanded || isShowing">Movie recommendation</span>
-                  <mat-icon mat-list-icon>movie</mat-icon>
-                </a>
+              <mat-nav-list style="padding: 0px;">
+                  <a mat-list-item (mouseover)="hover=true" (mouseleave)="hover=false" (click)="showSubmenu = !showSubmenu" class="parent"
+                    [ngStyle]="hoverStyle()"
+                   [routerLinkActive]="'active'" routerLink="recommendation">
+                    <span class="full-width" *ngIf="isExpanded || isShowing">Movie recommendation</span>
+                    <mat-icon mat-list-icon>movie</mat-icon>
+                  </a>
               </mat-nav-list>
-              <mat-nav-list>
-          </mat-nav-list>
             </mat-sidenav>
           
             <mat-sidenav-content>
