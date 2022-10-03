@@ -55,6 +55,12 @@ public movieForm: FormGroup= new FormGroup({
     });
   }
 
+  onRecommendationClicked() {
+    this.backendService.getRecommendations(this.selectedItems.map(x => x.id)).pipe(first()).subscribe(res => {
+      	console.log(res);
+    });
+  }
+
   private _filter(value: string): IMovie[] {
     let items = this.items.filter(option => option.title.toLowerCase().includes(value.toLowerCase()));
     items = items.length > 5 ? items.slice(0,5) : items;
@@ -66,9 +72,10 @@ public movieForm: FormGroup= new FormGroup({
           let description: string = '';
           if(res.total_results > 0) {
             path = `https://image.tmdb.org/t/p/w500${res.results[0].poster_path}`;
-            description = res.results[0].overview;
+            description = res.results[0].overview == undefined || res.results[0].overview == '' ? '*No description*' : res.results[0].overview;
           } else {
             path = "assets/img/empty.png";
+            description = '*No description*';
           }
           x.poster_path = path;
           x.description = description;
@@ -86,6 +93,14 @@ public movieForm: FormGroup= new FormGroup({
       return item == undefined ? '' : item.title;
     }
     return '';
+  }
+
+  removeTitle(id: string) {
+    const element = this.selectedItems.find(y => y.id == id) as IMovie;
+    this.items.push(element);
+    var index = this.selectedItems.findIndex(x => x.id == id);
+    this.selectedItems.splice(index, 1);
+    this.movieForm.controls["id"].setValue(0);
   }
 
   searchImage(): void {

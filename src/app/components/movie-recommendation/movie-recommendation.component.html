@@ -19,19 +19,25 @@
             </mat-autocomplete>
         </mat-form-field>
         <button color="primary" type="submit" mat-button>Add Movie</button>
+        <button color="primary" type="button" (click)="onRecommendationClicked()" mat-button>Recommend</button>
     </div>
 </form>
 
 <mat-list [@listAnimation]="selectedItems.length" class="list-horizontal" role="list">
     <mat-list-item role="listitem" *ngFor="let item of selectedItems">
-        <div class="img-with-text">
-            <span class="image-w">
-                <img [src]='item.poster_path'>
-                <div class="cover">
-                  <p>{{ item.description }}</p>
-                </div>
-            </span>
-            <p>{{item.title}}</p>
+        <div style="padding-top: 15px; padding-right: 5px;">
+            <button style="position: absolute; top: 0; right: 0; z-index: 99;" type="button" (click)="removeTitle(item.id)" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+                <mat-icon>close</mat-icon>
+              </button>
+            <mat-card class="img-with-text">
+                <span class="image-w">
+                    <img [src]='item.poster_path'>
+                    <div class="cover">
+                      <p>{{ item.description }}</p>
+                    </div>
+                </span>
+                <p style="font-size: 1em;">{{item.title}}</p>
+            </mat-card>
         </div>
     </mat-list-item>
 </mat-list>
