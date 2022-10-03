@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { UrlSerializer } from "@angular/router";
 import { Observable } from "rxjs";
+import { IMovie } from "../interfaces/movie.interface";
 import { ISearchResult } from "../interfaces/search-result.interface";
 
 @Injectable({ providedIn: "root" })
@@ -14,7 +15,7 @@ private baseApiUrl: string = "https://recommender-system-hs.herokuapp.com/";
     //     return this.http.get<ICategory[]>(`${this.baseApiUrl}categories${this.apiKey}`);
     // }
 
-    getMovies(): Observable<string[][]> {
-        return this.http.get<string[][]>(`${this.baseApiUrl}movies`);
+    getMovies(): Observable<IMovie[]> {
+        return this.http.get<IMovie[]>(`${this.baseApiUrl}movies`);
     }
 }

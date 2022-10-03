@@ -1,8 +1,9 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { first } from 'rxjs';
+import { first, map, Observable, startWith } from 'rxjs';
 import { IListItem } from 'src/app/interfaces/list-item.interface';
+import { IMovie } from 'src/app/interfaces/movie.interface';
 import { IResult } from 'src/app/interfaces/result.interface';
 import { BackendService } from 'src/app/services/backend.service';
 import { MovieDBService } from 'src/app/services/moviedb.service';
@@ -32,14 +33,59 @@ const listAnimation = trigger('listAnimation', [
   animations: [fadeAnimation, listAnimation]
 })
 export class MovieRecommendationComponent implements OnInit {
-public items: IResult[] = [];
+public filteredOptions: Observable<IMovie[]>;
+
+public items: IMovie[];
+
+
+public selectedItems: IMovie[] = [];
 public movieForm: FormGroup= new FormGroup({ 
-  "name": new FormControl()
+  "id": new FormControl()
 });
 
   constructor(private backendService: BackendService, private moviedbService: MovieDBService) { }
 
   ngOnInit(): void {
+    this.backendService.getMovies().pipe(first()).subscribe(res => {
+      this.items = res;
+      this.filteredOptions = this.movieForm.controls['id'].valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value || '')),
+      );
+    });
+  }
+
+  private _filter(value: string): IMovie[] {
+    let items = this.items.filter(option => option.title.toLowerCase().includes(value.toLowerCase()));
+    items = items.length > 5 ? items.slice(0,5) : items;
+    items.forEach(x => {
+      let item = this.items.find(y => y.id == x.id) as IMovie;
+      if(item.poster_path == undefined) {
+        this.moviedbService.getMovie(x.title).pipe(first()).subscribe(res => {
+          let path: string;
+          let description: string = '';
+          if(res.total_results > 0) {
+            path = `https://image.tmdb.org/t/p/w500${res.results[0].poster_path}`;
+            description = res.results[0].overview;
+          } else {
+            path = "assets/img/empty.png";
+          }
+          x.poster_path = path;
+          x.description = description;
+          item.poster_path = path;
+          item.description = description;
+        });
+      }
+    });
+    return items;
+  }
+
+  getTitle(id: string): string {
+    if(this.items != undefined) {
+      let item = this.items.find(movie => movie.id === id);
+      return item == undefined ? '' : item.title;
+    }
+    return '';
   }
 
   searchImage(): void {
@@ -47,27 +93,12 @@ public movieForm: FormGroup= new FormGroup({
   }
 
   getMoviePoster() {
-    const title: string = this.movieForm.controls["name"].value;
-    const index = title.indexOf(": Season");
-    const search = index >= 0 ? title.substring(0, index) : title;
-
-    this.moviedbService.getMovie(search).pipe(first()).subscribe(res => {
-      if(res.total_results > 0) {
-        const item = res.results[0];
-        item.name = item.title ?? item.name;
-        if(index >= 0) {
-          item.name = `${item.name} |${title.substring(index + 1)}`;
-        }
-        item.poster_path = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
-        this.items.push(item);
-      } else {
-        const item = {
-          name: title,
-          poster_path: "assets/img/empty.png"
-        } as IResult;
-        this.items.push(item);
-      }
-    });
+    const id: string = this.movieForm.controls["id"].value;
+    const element = this.items.find(y => y.id == id) as IMovie;
+    this.selectedItems.push(element);
+    var index = this.items.findIndex(x => x.id == id);
+    this.items.splice(index, 1);
+    this.movieForm.controls["id"].setValue(0);
   }
 
 }

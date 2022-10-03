@@ -2,17 +2,36 @@
     <div style="display: flex;">
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Movie title</mat-label>
-            <input matInput placeholder="Titanic" formControlName="name">
+            <!-- <input matInput placeholder="Titanic" formControlName="name"> -->
+            <input type="text"
+                placeholder="Select a film"
+                aria-label="Movie title"
+                formControlName="id"
+                matInput
+                [matAutocomplete]="auto">
+            <mat-autocomplete class="single-autocomplete" #auto="matAutocomplete" [displayWith]="getTitle.bind(this)">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option.id">
+                <div class="mat-container">
+                    <img [src]='option.poster_path'>
+                    <p>{{option.title}}</p>
+                </div>
+            </mat-option>
+            </mat-autocomplete>
         </mat-form-field>
-        <button color="primary" type="submit" mat-button>Search</button>
+        <button color="primary" type="submit" mat-button>Add Movie</button>
     </div>
 </form>
 
-<mat-list [@listAnimation]="items.length" class="list-horizontal" role="list">
-    <mat-list-item role="listitem" *ngFor="let item of items">
+<mat-list [@listAnimation]="selectedItems.length" class="list-horizontal" role="list">
+    <mat-list-item role="listitem" *ngFor="let item of selectedItems">
         <div class="img-with-text">
-            <img [src]='item.poster_path'>
-            <p>{{item.name}}</p>
+            <span class="image-w">
+                <img [src]='item.poster_path'>
+                <div class="cover">
+                  <p>{{ item.description }}</p>
+                </div>
+            </span>
+            <p>{{item.title}}</p>
         </div>
     </mat-list-item>
 </mat-list>
