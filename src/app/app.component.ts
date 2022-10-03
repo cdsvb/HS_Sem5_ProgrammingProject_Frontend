@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,11 +13,15 @@ export class AppComponent {
   showSubmenu: boolean = false;
   isShowing = false;
   showSubSubMenu: boolean = false;
+  hover: boolean = false;
 
   constructor(private router: Router) { }
 
-  switchUrl() {
-    this.router.navigate(['/']);
+  hoverStyle(): Object {
+    if(this.hover) {
+      return {backgroundColor: 'grey', color: 'white'};
+    }
+    return {backgroundColor: 'white', color: 'black'};
   }
 
   mouseenter() {

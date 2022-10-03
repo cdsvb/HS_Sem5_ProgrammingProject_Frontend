@@ -22,6 +22,11 @@ app-logo {
   cursor: pointer;
 }
 
+.active {
+  background-color: grey !important;
+  color: white !important;
+}
+
 .brand_logo {
   display: block;
   width: 32px;

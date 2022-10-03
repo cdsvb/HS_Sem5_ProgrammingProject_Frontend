@@ -11,6 +11,10 @@
   outline: 0;
 }
 
+.single-autocomplete {
+  max-height: 420px !important;
+}
+
 html, body {
   height: 100%;
   font-family: $fontProductSans;
