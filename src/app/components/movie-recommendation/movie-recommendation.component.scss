@@ -40,6 +40,7 @@
 }
 
 .img-with-text {
+    height: 360px;
     text-align: justify;
     margin-left: 20px;
     width: [width of img];
@@ -48,12 +49,12 @@
 .img-with-text span {
     display: block;
     margin: 0 auto;
-    height: 200px;
-    width: 133.33px;
+    height: 300px;
+    width: 200px;
 }
 
 .img-with-text p {
-    width: 120px;
+    width: 200px;
     margin-left: 6.5px;
     margin-top: 5px;
     text-align: center;
@@ -83,17 +84,14 @@ span {
 .image-w img {
   display: block;
   margin: 0 auto;
-  height: 200px;
-  width: 133.33px;
+  height: 300px;
+  width: 200px;
 }
 
 .cover {
   position: absolute;
   top: 0; right: 0;
   bottom: 0; left: 0;
-  margin-left: 36px;
-  height: 200px;
-  width: 133.33px;
   color: rgba(255,255,255,0);
   text-align: center;
   transition: all 1s linear;
@@ -106,8 +104,11 @@ span {
 }
 
 .cover p {
-  font-size: .8em;
+  font-size: 1em;
+  padding: 8px;
+  margin: 0px;
   position:relative;
+  width: 90%;
   height:100%;
   overflow-x:hidden;
   overflow-y:hidden;
