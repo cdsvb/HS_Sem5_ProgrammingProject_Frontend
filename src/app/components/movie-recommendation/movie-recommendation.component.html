@@ -1,4 +1,4 @@
-<form [formGroup]="movieForm" (submit)="searchImage()" class="example-form">
+<form [formGroup]="movieForm" class="example-form">
     <div style="display: flex;">
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Movie title</mat-label>
@@ -9,7 +9,7 @@
                 formControlName="id"
                 matInput
                 [matAutocomplete]="auto">
-            <mat-autocomplete class="single-autocomplete" #auto="matAutocomplete" [displayWith]="getTitle.bind(this)">
+            <mat-autocomplete (optionSelected)='addMovie($event.option.value)' class="single-autocomplete" #auto="matAutocomplete" [displayWith]="getTitle.bind(this)">
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option.id">
                 <div class="mat-container">
                     <img [src]='option.poster_path'>
@@ -18,8 +18,7 @@
             </mat-option>
             </mat-autocomplete>
         </mat-form-field>
-        <button color="primary" type="submit" mat-button>Add Movie</button>
-        <button color="primary" type="button" (click)="onRecommendationClicked()" mat-button>Recommend</button>
+        <button [disabled]="recommendDisabled()" color="primary" type="button" (click)="onRecommendationClicked()" mat-button>Recommend</button>
     </div>
 </form>
 
@@ -36,7 +35,7 @@
                       <p>{{ item.description }}</p>
                     </div>
                 </span>
-                <p style="font-size: 1em;">{{item.title}}</p>
+                <p style="font-size: 1.2em;font-weight: bold;">{{item.title}}</p>
             </mat-card>
         </div>
     </mat-list-item>

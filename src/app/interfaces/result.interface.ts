@@ -4,5 +4,6 @@ export interface IResult {
     original_title: string;
     title: string;
     name: string;
+    vote_average: number;
     overview: string;
 }
