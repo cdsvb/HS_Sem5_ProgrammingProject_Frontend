@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -12,7 +13,8 @@ describe('MovieRecommendationComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         MatInputModule,
-        MatButtonModule
+        MatButtonModule,
+        HttpClientModule
       ],
       declarations: [ MovieRecommendationComponent ]
     })
