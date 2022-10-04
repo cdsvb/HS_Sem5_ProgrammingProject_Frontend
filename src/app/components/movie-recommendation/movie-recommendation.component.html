@@ -13,7 +13,10 @@
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option.id">
                 <div class="mat-container">
                     <img [src]='option.poster_path'>
-                    <p>{{option.title}}</p>
+                    <div>
+                        <p style="line-height: 50px;">{{option.title}}</p>
+                        <p style="line-height: 0px;font-size: 0.8em;">{{option.release_year}}</p>
+                    </div>
                 </div>
             </mat-option>
             </mat-autocomplete>
