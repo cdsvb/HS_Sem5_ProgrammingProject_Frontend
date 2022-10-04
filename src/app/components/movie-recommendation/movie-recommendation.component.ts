@@ -36,6 +36,7 @@ const listAnimation = trigger('listAnimation', [
 export class MovieRecommendationComponent implements OnInit {
 public filteredOptions: Observable<IMovie[]>;
 
+
 public items: IMovie[];
 public recommendations: IMovie[] = [];
 
@@ -58,11 +59,16 @@ public movieForm: FormGroup= new FormGroup({
   }
 
   addMovie(id: string) {
-    const element = this.items.find(y => y.id == id) as IMovie;
-    this.selectedItems.push(element);
-    var index = this.items.findIndex(x => x.id == id);
-    this.items.splice(index, 1);
-    this.movieForm.controls["id"].setValue(0);
+    if(this.selectedItems.length < 5) {
+      const element = this.items.find(y => y.id == id) as IMovie;
+      this.selectedItems.push(element);
+      var index = this.items.findIndex(x => x.id == id);
+      this.items.splice(index, 1);
+      this.movieForm.controls["id"].setValue(0);
+    }
+    if(this.selectedItems.length == 5) {
+      this.movieForm.disable();
+    }
   }
 
   onRecommendationClicked() {
@@ -119,7 +125,7 @@ public movieForm: FormGroup= new FormGroup({
       this.recommendations.sort(function(a, b) {
         return (a.vote_average > b.vote_average) ? -1 : 1;
       });
-      console.log(this.recommendations.slice(0,3));
+      console.log(this.recommendations.slice(0,5));
     }
 }
 
@@ -145,6 +151,9 @@ public movieForm: FormGroup= new FormGroup({
     var index = this.selectedItems.findIndex(x => x.id == id);
     this.selectedItems.splice(index, 1);
     this.movieForm.controls["id"].setValue(0);
+    if(this.selectedItems.length < 5) {
+      this.movieForm.enable();
+    }
   }
 
 }
