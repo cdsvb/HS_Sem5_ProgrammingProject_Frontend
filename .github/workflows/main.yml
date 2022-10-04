@@ -36,12 +36,12 @@ jobs:
         if: steps.cache-nodemodules.outputs.cache-hit != 'true'
         run: |
           npm ci
-      - name: Test
-        run: |
-          npm run test
       - name: Build
         run: |
           npm run build --prod
+      - name: Test
+        run: |
+          npm run test
       - name: Conventional Changelog Action
         id: changelog
         uses: TriPSs/conventional-changelog-action@v3
