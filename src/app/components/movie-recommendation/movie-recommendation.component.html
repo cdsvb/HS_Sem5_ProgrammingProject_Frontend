@@ -3,7 +3,7 @@
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Movie title</mat-label>
             <!-- <input matInput placeholder="Titanic" formControlName="name"> -->
-            <input type="text"
+            <input type="text" [disabled]="isDisabled()"
                 placeholder="Select a film"
                 aria-label="Movie title"
                 formControlName="id"
