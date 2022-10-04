@@ -1,8 +1,11 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MovieRecommendationComponent } from './movie-recommendation.component';
 
@@ -16,7 +19,11 @@ describe('MovieRecommendationComponent', () => {
         MatInputModule,
         MatButtonModule,
         HttpClientModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatListModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule
       ],
       declarations: [ MovieRecommendationComponent ]
     })
