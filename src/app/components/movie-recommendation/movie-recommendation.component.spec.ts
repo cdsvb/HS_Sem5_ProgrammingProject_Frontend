@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 import { MovieRecommendationComponent } from './movie-recommendation.component';
 
@@ -8,6 +10,10 @@ describe('MovieRecommendationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        MatInputModule,
+        MatButtonModule
+      ],
       declarations: [ MovieRecommendationComponent ]
     })
     .compileComponents();
