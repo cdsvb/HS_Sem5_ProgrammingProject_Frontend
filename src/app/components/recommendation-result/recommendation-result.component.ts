@@ -17,7 +17,7 @@ export interface DialogData {
   templateUrl: './recommendation-result.component.html',
   styleUrls: ['./recommendation-result.component.scss']
 })
-export class RecommendationResultComponent implements OnInit {
+export class RecommendationResultComponent {
 public recommendations: IMovie[] = [];
 public dataService: DataService;
 
@@ -29,9 +29,6 @@ public dataService: DataService;
       this.dataService = data.data;
       this.loadRecommendations(data.items);
     }
-
-  ngOnInit(): void {
-  }
 
   loadRecommendations(selectedItems: IMovie[]) {
     this.recommendations = [];
