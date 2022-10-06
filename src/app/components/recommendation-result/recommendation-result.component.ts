@@ -17,9 +17,10 @@ export interface DialogData {
   templateUrl: './recommendation-result.component.html',
   styleUrls: ['./recommendation-result.component.scss']
 })
-export class RecommendationResultComponent {
+export class RecommendationResultComponent implements OnInit {
 public recommendations: IMovie[] = [];
 public dataService: DataService;
+public items: IMovie[];
 
   constructor(private backendService: BackendService,
     private moviedbService: MovieDBService,
@@ -27,12 +28,16 @@ public dataService: DataService;
      @Inject(MAT_DIALOG_DATA) data: DialogData) 
     { 
       this.dataService = data.data;
-      this.loadRecommendations(data.items);
+      this.items = data.items;
     }
 
-  loadRecommendations(selectedItems: IMovie[]) {
+  ngOnInit(): void {
+    this.loadRecommendations();
+  }
+
+  loadRecommendations() {
     this.recommendations = [];
-    this.backendService.getRecommendations(selectedItems.map(x => x.id)).pipe(first()).subscribe(async res => {
+    this.backendService.getRecommendations(this.items.map(x => x.id)).pipe(first()).subscribe(async res => {
       for(let x = 0; x < res.length; x++) {
         for(let y = 0; y < res[x].recommendations.length; y++) {
           let id = res[x].recommendations[y];
