@@ -1,0 +1,16 @@
+<h1>Recommendations</h1>
+<mat-list [@listAnimation]="recommendations.length" class="list-horizontal" role="list">
+    <mat-list-item role="listitem" *ngFor="let item of recommendations">
+        <div style="padding-top: 15px; padding-right: 5px;">
+            <mat-card class="img-with-text">
+                <span class="image-w">
+                    <img [src]='item.poster_path'>
+                    <div class="cover">
+                      <p>{{ item.description }}</p>
+                    </div>
+                </span>
+                <p style="font-size: 1.2em;font-weight: bold;">{{item.title}}</p>
+            </mat-card>
+        </div>
+    </mat-list-item>
+</mat-list>
