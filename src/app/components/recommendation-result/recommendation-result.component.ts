@@ -20,7 +20,7 @@ export interface DialogData {
 export class RecommendationResultComponent implements OnInit {
 public recommendations: IMovie[] = [];
 public dataService: DataService;
-public items: IMovie[];
+public items: IMovie[] = [];
 
   constructor(private backendService: BackendService,
     private moviedbService: MovieDBService,
@@ -36,22 +36,24 @@ public items: IMovie[];
   }
 
   loadRecommendations() {
-    this.recommendations = [];
-    this.backendService.getRecommendations(this.items.map(x => x.id)).pipe(first()).subscribe(async res => {
-      for(let x = 0; x < res.length; x++) {
-        for(let y = 0; y < res[x].recommendations.length; y++) {
-          let id = res[x].recommendations[y];
-          let movie = this.dataService.findItem(id);
-          if(this.recommendations !== undefined && this.recommendations.length > 0) {
-            if(this.recommendations.findIndex(r => r.id == id) >= 0) {
-              continue;
+    if(this.items !== undefined) {
+      this.recommendations = [];
+      this.backendService.getRecommendations(this.items?.map(x => x.id)).pipe(first()).subscribe(async res => {
+        for(let x = 0; x < res.length; x++) {
+          for(let y = 0; y < res[x].recommendations.length; y++) {
+            let id = res[x].recommendations[y];
+            let movie = this.dataService.findItem(id);
+            if(this.recommendations !== undefined && this.recommendations.length > 0) {
+              if(this.recommendations.findIndex(r => r.id == id) >= 0) {
+                continue;
+              }
             }
+            this.recommendations.push(movie);
+            this.getProperties(movie);
           }
-          this.recommendations.push(movie);
-          this.getProperties(movie);
         }
-      }
     });
+    }
   }
 
   async getProperties(x: IMovie) {
