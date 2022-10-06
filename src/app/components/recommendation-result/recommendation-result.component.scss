@@ -1,0 +1,114 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    margin-left: 40px;
+    margin-top: 50px;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+.mat-container {
+  height: 70px;
+  flex: auto;
+  display: flex;
+}
+
+.mat-container img {
+  display: block;
+  height: 70px;
+  width: 46.66px;
+}
+
+.mat-container p {
+  margin-left: 6.5px;
+}
+
+.mat-option {
+  height: 80px;
+}
+
+.list-horizontal {
+    padding: 0;
+    .mat-list-item {
+      display: inline-block;
+      height: auto;
+      width: auto;
+    }
+}
+
+.img-with-text {
+    height: 360px;
+    text-align: justify;
+    margin-left: 20px;
+    width: [width of img];
+}
+
+.img-with-text span {
+    display: block;
+    margin: 0 auto;
+    height: 300px;
+    width: 200px;
+}
+
+.img-with-text p {
+    width: 200px;
+    margin-left: 6.5px;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.thumbnail-list {
+  list-style: none;
+  margin: 0; 
+  padding: 0;
+}
+
+.thumbnail-list li {
+  float: left;
+}
+
+span {
+  text-decoration: none;
+  color: inherit;
+}
+
+.thumbnail-list .image-w {
+  display: block;
+  position: relative;
+  width: 16em;
+}
+
+.image-w img {
+  display: block;
+  margin: 0 auto;
+  height: 300px;
+  width: 200px;
+}
+
+.cover {
+  position: absolute;
+  top: 0; right: 0;
+  bottom: 0; left: 0;
+  color: rgba(255,255,255,0);
+  text-align: center;
+  transition: all 1s linear;
+}
+
+.cover:hover {
+  background-color: rgba(0,0,0,.8);
+  color: rgba(255,255,255,1);
+  transition: all .2s linear;
+}
+
+.cover p {
+  font-size: 1em;
+  padding: 8px;
+  margin: 0px;
+  position:relative;
+  width: 90%;
+  height:100%;
+  overflow-x:hidden;
+  overflow-y:hidden;
+}

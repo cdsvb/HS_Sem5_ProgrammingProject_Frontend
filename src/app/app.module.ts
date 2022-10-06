@@ -16,12 +16,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { RecommendationResultComponent } from './components/recommendation-result/recommendation-result.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     MovieRecommendationComponent,
-    DashboardComponent
+    DashboardComponent,
+    RecommendationResultComponent
   ],
   imports: [
     FormsModule,
@@ -37,7 +40,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatCardModule,
     HttpClientModule,
     MatInputModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
