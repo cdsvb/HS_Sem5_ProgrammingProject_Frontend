@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCardModule } from '@angular/material/card';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
 
 import { RecommendationResultComponent } from './recommendation-result.component';
@@ -18,7 +18,13 @@ describe('RecommendationResultComponent', () => {
         MatCardModule,
         HttpClientModule, 
         MatDialogModule
-       ]
+       ],
+       providers: [
+        {
+          provide: MatDialogRef,
+          useValue: {}
+        }
+        ],
     })
     .compileComponents();
 
