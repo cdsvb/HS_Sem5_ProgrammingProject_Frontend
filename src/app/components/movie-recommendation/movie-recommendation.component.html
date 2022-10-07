@@ -27,7 +27,7 @@
 <mat-list [@listAnimation]="selectedItems.length" class="list-horizontal" role="list">
     <mat-list-item role="listitem" *ngFor="let item of selectedItems">
         <div style="padding-top: 15px; padding-right: 5px;">
-            <button style="position: absolute; top: 0; right: 0; z-index: 99;" type="button" (click)="removeTitle(item.id)" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+            <button style="position: absolute; top: 0; right: 0; z-index: 99;" type="button" (click)="removeTitle(item.id)" mat-mini-fab color="primary">
                 <mat-icon>close</mat-icon>
               </button>
             <mat-card class="img-with-text">

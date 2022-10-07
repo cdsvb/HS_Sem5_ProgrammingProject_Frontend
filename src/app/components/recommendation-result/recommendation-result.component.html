@@ -1,7 +1,8 @@
 <h1>Recommendations</h1>
-<mat-list [@listAnimation]="recommendations.length" class="list-horizontal" role="list">
-    <mat-list-item role="listitem" *ngFor="let item of recommendations">
+<mat-list class="list-horizontal" role="list">
+    <mat-list-item role="listitem" *ngFor="let item of selectedRecommendations">
         <div style="padding-top: 15px; padding-right: 5px;">
+            <div id="circle" [style]="{'background-color': getBackgroundColor(item.vote_average * 10)}">{{item.vote_average * 10}}%</div>
             <mat-card class="img-with-text">
                 <span class="image-w">
                     <img [src]='item.poster_path'>
@@ -14,3 +15,11 @@
         </div>
     </mat-list-item>
 </mat-list>
+<div class="center">
+    <button [disabled]="moreDisabled()" color="primary" type="button" class="recommend-button" (click)="onLoadMoreClicked()" mat-raised-button>
+        <mat-icon>
+        add_circle
+    </mat-icon>
+    More recommendations
+</button>
+</div>

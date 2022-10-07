@@ -39,7 +39,10 @@
 }
 
 .img-with-text {
-    height: 360px;
+    border-radius: 20px;
+    padding: 0px;
+    background-color: rgba(255,255,255,0.9);
+    height: 390px;
     text-align: justify;
     margin-left: 20px;
     width: [width of img];
@@ -48,8 +51,8 @@
 .img-with-text span {
     display: block;
     margin: 0 auto;
-    height: 300px;
-    width: 200px;
+    height: 330px;
+    width: 220px;
 }
 
 .img-with-text p {
@@ -80,12 +83,43 @@ span {
   width: 16em;
 }
 
+#circle {
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    position: absolute;
+    bottom: 65px;
+    right: 25px;
+    z-index: 3;
+    text-align: center;
+    line-height: 70px;
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+.recommend-button {
+    margin-top: 25px;
+    height: 50px;
+    font-size: 1em;
+  }
+
 .image-w img {
-  display: block;
-  margin: 0 auto;
-  height: 300px;
-  width: 200px;
-}
+    display: block;
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .center {
+    display: flex;
+    background-color: transparent;
+    justify-content: center;
+  }
+  .center button{
+    align-self: baseline;
+  }
 
 .cover {
   position: absolute;
@@ -94,6 +128,7 @@ span {
   color: rgba(255,255,255,0);
   text-align: center;
   transition: all 1s linear;
+  z-index: 4;
 }
 
 .cover:hover {

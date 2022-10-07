@@ -74,8 +74,8 @@ public movieForm: FormGroup= new FormGroup({
 
   onRecommendationClicked() {
     let dialogRef = this.dialog.open(RecommendationResultComponent, {
-      height: '1000px',
-      width: '2000px',
+      height: '575px',
+      width: '1450px',
       data: { data: this.dataService, items: this.selectedItems }
     });
     dialogRef.afterClosed().subscribe(result => {
