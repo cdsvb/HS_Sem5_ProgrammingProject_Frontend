@@ -19,8 +19,12 @@ export interface DialogData {
 })
 export class RecommendationResultComponent implements OnInit {
 public recommendations: IMovie[] = [];
+public selectedRecommendations: IMovie[] = [];
 public dataService: DataService;
 public items: IMovie[] = [];
+public tasks: number = 0;
+public recommendationCount: number = 5;
+public finished: number = 0;
 
   constructor(private backendService: BackendService,
     private moviedbService: MovieDBService,
@@ -35,10 +39,22 @@ public items: IMovie[] = [];
     this.loadRecommendations();
   }
 
+  moreDisabled(): boolean {
+    return this.recommendations.length <= this.recommendationCount;
+  }
+
+  onLoadMoreClicked() {
+    if(this.recommendationCount == 5) this.dialogRef.updateSize('1450px', '970px');
+    this.recommendationCount = this.recommendationCount + 5;
+    this.selectedRecommendations = this.recommendations.slice(0, this.recommendationCount);
+  }
+
   loadRecommendations() {
     if(this.items !== undefined) {
       this.recommendations = [];
       this.backendService.getRecommendations(this.items?.map(x => x.id)).pipe(first()).subscribe(async res => {
+        this.finished = 0;
+        this.tasks = res.length;
         for(let x = 0; x < res.length; x++) {
           for(let y = 0; y < res[x].recommendations.length; y++) {
             let id = res[x].recommendations[y];
@@ -56,10 +72,29 @@ public items: IMovie[] = [];
     }
   }
 
+  setReady() {
+    if(this.finished == this.tasks) {
+      this.recommendations.sort(function(a, b) {
+        return (a.vote_average > b.vote_average) ? -1 : 1;
+      });
+      this.selectedRecommendations = this.recommendations.slice(0, 5);
+    } else {
+      this.finished++;
+    }
+  }
+
+  getBackgroundColor(average: number): string {
+    if(average >= 80) return 'lime';
+    else if(average < 80 && average >= 60) return 'yellowgreen';
+    else if(average < 60 && average >= 40) return 'yellow';
+    else if(average < 40 && average >= 20) return 'orange';
+    else return 'crimson';
+  }
+
   async getProperties(x: IMovie) {
     let item = this.dataService.findItem(x.id);
     if(item.poster_path == undefined) {
-      var result = (await this.moviedbService.getMovie(x.title).pipe(first()).toPromise()) as ISearchResult;
+      this.moviedbService.getMovie(x.title).pipe(first()).subscribe(result => {
       let path: string;
       let description: string = '';
       let vote_average: number = 0;
@@ -69,7 +104,7 @@ public items: IMovie[] = [];
         description = item.overview == undefined || item.overview == '' ? '*No description*' : item.overview;
         vote_average = item.vote_average;
       } else {
-        path = "assets/img/empty.png";
+        path = "assets/img/ticket.jpg";
         description = '*No description*';
       }
       x.poster_path = path;
@@ -78,11 +113,11 @@ public items: IMovie[] = [];
       item.poster_path = path;
       item.description = description;
       item.vote_average = vote_average;
+      this.setReady();
+    });
+  } else {
+    this.setReady();
+  } 
   }
-  this.recommendations.sort(function(a, b) {
-    return (a.vote_average > b.vote_average) ? -1 : 1;
-  });
-  console.log(this.recommendations.slice(0,5));
 }
 
-}
