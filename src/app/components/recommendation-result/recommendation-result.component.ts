@@ -84,11 +84,11 @@ public finished: number = 0;
   }
 
   getBackgroundColor(average: number): string {
-    if(average >= 80) return 'lime';
-    else if(average < 80 && average >= 60) return 'yellowgreen';
-    else if(average < 60 && average >= 40) return 'yellow';
-    else if(average < 40 && average >= 20) return 'orange';
-    else return 'crimson';
+    if(average >= 80) return 'rgba(50,205,50,0.8)';
+    else if(average < 80 && average >= 60) return 'rgba(154,205,50,0.8)';
+    else if(average < 60 && average >= 40) return 'rgba(255,255,0,0.8)';
+    else if(average < 40 && average >= 20) return 'rgba(255,165,0,0.8)';
+    else return 'rgba(220, 20, 60,0.8)';
   }
 
   async getProperties(x: IMovie) {
