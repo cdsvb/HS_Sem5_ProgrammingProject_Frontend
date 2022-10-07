@@ -1,6 +1,6 @@
 <form [formGroup]="movieForm" class="example-form">
     <div style="display: flex;">
-        <mat-form-field class="example-full-width" appearance="fill">
+        <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Movie title</mat-label>
             <!-- <input matInput placeholder="Titanic" formControlName="name"> -->
             <input type="text" [disabled]="isDisabled()"
@@ -21,7 +21,6 @@
             </mat-option>
             </mat-autocomplete>
         </mat-form-field>
-        <button [disabled]="recommendDisabled()" color="primary" type="button" (click)="onRecommendationClicked()" mat-button>Recommend</button>
     </div>
 </form>
 
@@ -43,4 +42,16 @@
         </div>
     </mat-list-item>
 </mat-list>
+
+<div class="center">
+    <mat-card style="margin-top: 64px;">
+        <h1>{{selectedItems.length}} of max. 5 Movies selected</h1>
+        <button [disabled]="recommendDisabled()" color="primary" type="button" class="recommend-button" (click)="onRecommendationClicked()" mat-raised-button>
+            <mat-icon>
+            play_circle
+        </mat-icon>
+        Recommend movies
+    </button>
+    </mat-card>
+</div>
   

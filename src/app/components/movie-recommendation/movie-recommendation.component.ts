@@ -104,7 +104,7 @@ public movieForm: FormGroup= new FormGroup({
           description = item.overview == undefined || item.overview == '' ? '*No description*' : item.overview;
           vote_average = item.vote_average;
         } else {
-          path = "assets/img/empty.png";
+          path = "assets/img/ticket.jpg";
           description = '*No description*';
         }
         x.poster_path = path;
