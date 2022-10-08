@@ -100,7 +100,7 @@ public finished: number = 0;
       let vote_average: number = 0;
       if(result.results.length > 0) {
         let item = result.results[0];
-        path = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
+        path = item.poster_path !== null ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "assets/img/ticket.jpg";
         description = item.overview == undefined || item.overview == '' ? '*No description*' : item.overview;
         vote_average = item.vote_average;
       } else {
