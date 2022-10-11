@@ -46,12 +46,18 @@
 <div class="center">
     <mat-card style="margin-top: 64px;">
         <h1>{{selectedItems.length}} of max. 5 Movies selected</h1>
+        <button [disabled]="recommendDisabled()" color="primary" type="button" class="clear-button" (click)="clearSelection()" mat-raised-button>
+            <mat-icon>
+                cleaning_services
+        </mat-icon>
+        Clear selection
+        </button>
         <button [disabled]="recommendDisabled()" color="primary" type="button" class="recommend-button" (click)="onRecommendationClicked()" mat-raised-button>
             <mat-icon>
             play_circle
         </mat-icon>
         Recommend movies
-    </button>
+        </button>
     </mat-card>
 </div>
   

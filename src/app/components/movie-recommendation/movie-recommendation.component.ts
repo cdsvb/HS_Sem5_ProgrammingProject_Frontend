@@ -116,6 +116,13 @@ public movieForm: FormGroup= new FormGroup({
     }
 }
 
+clearSelection(): void {
+  this.selectedItems.forEach(x => {
+    this.dataService.addItem(x);
+  });
+  this.selectedItems = [];
+}
+
   getTitle(id: string): string {
     let item = this.dataService.findItem(id);
     return item == undefined ? '' : item.title;
