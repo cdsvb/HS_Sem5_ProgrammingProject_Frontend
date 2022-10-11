@@ -52,24 +52,32 @@ public finished: number = 0;
   loadRecommendations() {
     if(this.items !== undefined) {
       this.recommendations = [];
-      this.backendService.getRecommendations(this.items?.map(x => x.id)).pipe(first()).subscribe(async res => {
+      this.backendService.getRecommendations(this.items?.map(x => x.id)).pipe(first()).subscribe(res => {
+        let ids = [] as string[];
+        res.forEach(x => ids = ids.concat(x.recommendations))
+        ids = ids.filter(this.onlyUnique);
+        ids = ids.filter(x => !this.items.find(y => y.id == x));
         this.finished = 0;
         this.tasks = res.length;
-        for(let x = 0; x < res.length; x++) {
-          for(let y = 0; y < res[x].recommendations.length; y++) {
-            let id = res[x].recommendations[y];
-            let movie = this.dataService.findItem(id);
+        ids.forEach(id => {
             if(this.recommendations !== undefined && this.recommendations.length > 0) {
-              if(this.recommendations.findIndex(r => r.id == id) >= 0) {
-                continue;
+              if(this.recommendations.findIndex(r => r.id == id) < 0) {
+                let movie = this.dataService.findItem(id);
+                this.recommendations.push(movie);
+                this.getProperties(movie);
               }
+            } else {
+              let movie = this.dataService.findItem(id);
+              this.recommendations.push(movie);
+              this.getProperties(movie);
             }
-            this.recommendations.push(movie);
-            this.getProperties(movie);
-          }
-        }
+        });
     });
     }
+  }
+
+  onlyUnique(value: string, index: number, self: string[]) {
+    return self.indexOf(value) === index;
   }
 
   setReady() {
