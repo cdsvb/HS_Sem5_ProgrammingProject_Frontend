@@ -122,7 +122,7 @@ public finished: number = 0;
         path = "assets/img/ticket.jpg";
         description = '*No description*';
         x.image = of(
-          path
+          `url('${path}')`
         );
       }
       x.poster_path = path;

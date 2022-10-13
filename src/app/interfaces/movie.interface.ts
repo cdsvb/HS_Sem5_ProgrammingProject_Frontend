@@ -1,3 +1,4 @@
+import { SafeUrl } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 export interface IMovie {
     id: string;
@@ -6,5 +7,5 @@ export interface IMovie {
     release_year: string;
     poster_path: string;
     description: string;
-    image: Observable<string>
+    image: Observable<SafeUrl>
 }

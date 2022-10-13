@@ -2,6 +2,7 @@ import { animate, query, stagger, style, transition, trigger } from '@angular/an
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { DomSanitizer } from '@angular/platform-browser';
 import { first, map, Observable, startWith, of } from 'rxjs';
 import { IListItem } from 'src/app/interfaces/list-item.interface';
 import { IMovie } from 'src/app/interfaces/movie.interface';
@@ -51,6 +52,7 @@ public backgroundImageURL$: Observable<string>;
      private backendService: BackendService,
      private moviedbService: MovieDBService,
      private dataService: DataService,
+     private sanitizer: DomSanitizer,
      private IS: ImageService) 
      { }
 
@@ -110,15 +112,11 @@ public backgroundImageURL$: Observable<string>;
           vote_average = item.vote_average;
           const image: Observable<Blob> = this.IS.fetchImage(path);
           image.subscribe(b => { this.IS.saveImageToDatabase(path, b); }); 
-          x.image = of(
-            await this.IS.getCSSBackgroundImageURL(path)
-          );
+          x.image = of(await this.IS.getCSSBackgroundImageURL(path));
         } else {
           path = "assets/img/ticket.jpg";
           description = '*No description*';
-          x.image = of(
-            path
-          );
+          x.image = of(`url('${path}')`);
         }
         x.poster_path = path;
         x.description = description;

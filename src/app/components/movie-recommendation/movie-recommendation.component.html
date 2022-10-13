@@ -12,7 +12,6 @@
             <mat-autocomplete (optionSelected)='addMovie($event.option.value)' class="single-autocomplete" #auto="matAutocomplete" [displayWith]="getTitle.bind(this)">
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option.id">
                 <div class="mat-container">
-                    <!-- <div [ngStyle]="{'background-image': backgroundImageURL$ | async}"></div> -->
                     <img [style.background-image]='option.image | async'>
                     <div>
                         <p style="line-height: 50px;font-weight: bold;">{{option.title}}</p>
