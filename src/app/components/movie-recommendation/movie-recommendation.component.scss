@@ -77,6 +77,9 @@
   display: block;
   height: 70px;
   width: 46.66px;
+  background-size: 100%;
+  background-size: 100% 70px;
+  background-repeat: no-repeat;
 }
 
 .mat-container p {
@@ -177,6 +180,8 @@ span {
   margin: 0 auto;
   height: 100%;
   width: 100%;
+  background-size: 100% 330px;
+  background-repeat: no-repeat;
 }
 
 .cover {

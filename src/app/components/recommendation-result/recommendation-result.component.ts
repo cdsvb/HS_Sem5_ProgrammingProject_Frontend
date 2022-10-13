@@ -3,9 +3,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IMovie } from 'src/app/interfaces/movie.interface';
 import { BackendService } from 'src/app/services/backend.service';
 import { DataService } from 'src/app/services/data.service';
-import { first } from 'rxjs';
+import { first, of, Observable } from 'rxjs';
 import { ISearchResult } from 'src/app/interfaces/search-result.interface';
 import { MovieDBService } from 'src/app/services/moviedb.service';
+import { ImageService } from 'src/app/services/image.service';
 
 export interface DialogData {
   data: DataService;
@@ -28,7 +29,8 @@ public finished: number = 0;
 
   constructor(private backendService: BackendService,
     private moviedbService: MovieDBService,
-     private dialogRef: MatDialogRef<RecommendationResultComponent>,
+    private IS: ImageService,
+    private dialogRef: MatDialogRef<RecommendationResultComponent>,
      @Inject(MAT_DIALOG_DATA) data: DialogData) 
     { 
       this.dataService = data.data;
@@ -102,7 +104,7 @@ public finished: number = 0;
   async getProperties(x: IMovie) {
     let item = this.dataService.findItem(x.id);
     if(item.poster_path == undefined) {
-      this.moviedbService.getMovie(x.title).pipe(first()).subscribe(result => {
+      this.moviedbService.getMovie(x.title).pipe(first()).subscribe(async result => {
       let path: string;
       let description: string = '';
       let vote_average: number = 0;
@@ -111,9 +113,17 @@ public finished: number = 0;
         path = item.poster_path !== null ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "assets/img/ticket.jpg";
         description = item.overview == undefined || item.overview == '' ? '*No description*' : item.overview;
         vote_average = item.vote_average;
+        const image: Observable<Blob> = this.IS.fetchImage(path);
+        image.subscribe(b => { this.IS.saveImageToDatabase(path, b); }); 
+        x.image = of(
+          await this.IS.getCSSBackgroundImageURL(path)
+        );
       } else {
         path = "assets/img/ticket.jpg";
         description = '*No description*';
+        x.image = of(
+          path
+        );
       }
       x.poster_path = path;
       x.description = description;

@@ -5,7 +5,7 @@
             <div id="circle" [style]="{'background-color': getBackgroundColor(item.vote_average * 10)}">{{item.vote_average * 10}}%</div>
             <mat-card class="img-with-text">
                 <span class="image-w">
-                    <img [src]='item.poster_path'>
+                    <img [style.background-image]='item.image | async'>
                     <div class="cover">
                       <p>{{ item.description }}</p>
                     </div>

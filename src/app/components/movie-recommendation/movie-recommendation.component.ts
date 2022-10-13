@@ -2,13 +2,14 @@ import { animate, query, stagger, style, transition, trigger } from '@angular/an
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { first, map, Observable, startWith } from 'rxjs';
+import { first, map, Observable, startWith, of } from 'rxjs';
 import { IListItem } from 'src/app/interfaces/list-item.interface';
 import { IMovie } from 'src/app/interfaces/movie.interface';
 import { IResult } from 'src/app/interfaces/result.interface';
 import { ISearchResult } from 'src/app/interfaces/search-result.interface';
 import { BackendService } from 'src/app/services/backend.service';
 import { DataService } from 'src/app/services/data.service';
+import { ImageService } from 'src/app/services/image.service';
 import { MovieDBService } from 'src/app/services/moviedb.service';
 import { RecommendationResultComponent } from '../recommendation-result/recommendation-result.component';
 
@@ -44,10 +45,14 @@ public movieForm: FormGroup= new FormGroup({
   "id": new FormControl()
 });
 
+public backgroundImageURL$: Observable<string>;
+
   constructor(private dialog: MatDialog,
      private backendService: BackendService,
      private moviedbService: MovieDBService,
-     private dataService: DataService) { }
+     private dataService: DataService,
+     private IS: ImageService) 
+     { }
 
   ngOnInit(): void {
     this.backendService.getMovies().pipe(first()).subscribe(res => {
@@ -100,12 +105,20 @@ public movieForm: FormGroup= new FormGroup({
         let vote_average: number = 0;
         if(result.results.length > 0) {
           let item = result.results[0];
-          path = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
+          path = item.poster_path !== null ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "assets/img/ticket.jpg";
           description = item.overview == undefined || item.overview == '' ? '*No description*' : item.overview;
           vote_average = item.vote_average;
+          const image: Observable<Blob> = this.IS.fetchImage(path);
+          image.subscribe(b => { this.IS.saveImageToDatabase(path, b); }); 
+          x.image = of(
+            await this.IS.getCSSBackgroundImageURL(path)
+          );
         } else {
           path = "assets/img/ticket.jpg";
           description = '*No description*';
+          x.image = of(
+            path
+          );
         }
         x.poster_path = path;
         x.description = description;

@@ -105,11 +105,13 @@ span {
     font-size: 1em;
   }
 
-.image-w img {
+  .image-w img {
     display: block;
     margin: 0 auto;
     height: 100%;
     width: 100%;
+    background-size: 100% 330px;
+    background-repeat: no-repeat;
   }
   
   .center {
