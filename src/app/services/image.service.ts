@@ -27,14 +27,17 @@ export class ImageService {
    */
   async getCSSBackgroundImageURL(url: string) {
     let images: BlobImage[] = await readImagesByURL(url);
+    console.log(url + ' | ' + images.length);
     if (images.length == 0) {
+      const image: Observable<Blob> = this.fetchImage(url);
+      image.subscribe(b => { this.saveImageToDatabase(url, b); });
       return `url('${url}')`;
     }
 
     const safeURL: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(
       URL.createObjectURL(images[0].data)
     );
-
+    
     return this.getSafeBackgroundImageUrl(safeURL);
   }
 

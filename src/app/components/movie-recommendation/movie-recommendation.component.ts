@@ -110,9 +110,7 @@ public backgroundImageURL$: Observable<string>;
           path = item.poster_path !== null ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "assets/img/ticket.jpg";
           description = item.overview == undefined || item.overview == '' ? '*No description*' : item.overview;
           vote_average = item.vote_average;
-          const image: Observable<Blob> = this.IS.fetchImage(path);
-          image.subscribe(b => { this.IS.saveImageToDatabase(path, b); }); 
-          x.image = of(await this.IS.getCSSBackgroundImageURL(path));
+          x.image = item.poster_path !== null ? of(await this.IS.getCSSBackgroundImageURL(path)) : of(`url('${path}')`);
         } else {
           path = "assets/img/ticket.jpg";
           description = '*No description*';
