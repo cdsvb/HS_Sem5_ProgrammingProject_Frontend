@@ -3,7 +3,7 @@
         <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Movie title</mat-label>
             <!-- <input matInput placeholder="Titanic" formControlName="name"> -->
-            <input type="text" [disabled]="isDisabled()"
+            <input type="text"
                 placeholder="Select a film"
                 aria-label="Movie title"
                 formControlName="id"
@@ -13,7 +13,7 @@
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option.id">
                 <div class="mat-container">
                     <img [style.background-image]='option.image | async'>
-                    <div>
+                    <div style="width: 0px;">
                         <p style="line-height: 50px;font-weight: bold;">{{option.title}}</p>
                         <p style="line-height: 0px;font-size: 0.8em;">{{option.release_year}}</p>
                     </div>

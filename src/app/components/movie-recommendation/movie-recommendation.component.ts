@@ -43,7 +43,7 @@ public filteredOptions: Observable<IMovie[]>;
 
 public selectedItems: IMovie[] = [];
 public movieForm: FormGroup= new FormGroup({ 
-  "id": new FormControl()
+  "id": new FormControl({ disabled: false })
 });
 
 public backgroundImageURL$: Observable<string>;
@@ -75,7 +75,7 @@ public backgroundImageURL$: Observable<string>;
       this.movieForm.controls["id"].setValue(0);
     }
     if(this.selectedItems.length == 5) {
-      this.movieForm.disable();
+        this.movieForm.get('id')?.disable();
     }
   }
 
@@ -130,15 +130,14 @@ clearSelection(): void {
     this.dataService.addItem(x);
   });
   this.selectedItems = [];
+  if(this.selectedItems.length < 5) {
+    this.movieForm.get('id')?.enable();
+  }
 }
 
   getTitle(id: string): string {
     let item = this.dataService.findItem(id);
     return item == undefined ? '' : item.title;
-  }
-
-  isDisabled(): boolean {
-    return this.selectedItems.length > 4;
   }
 
   recommendDisabled(): boolean {
@@ -152,7 +151,7 @@ clearSelection(): void {
     this.selectedItems.splice(index, 1);
     this.movieForm.controls["id"].setValue(0);
     if(this.selectedItems.length < 5) {
-      this.movieForm.enable();
+      this.movieForm.get('id')?.enable();
     }
   }
 
